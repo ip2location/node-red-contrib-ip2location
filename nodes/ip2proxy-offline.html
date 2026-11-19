@@ -1,0 +1,19 @@
+<script type="text/javascript">
+(function() { RED.nodes.registerType('ip2proxy-offline', {
+  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},binPath:{value:'',required:true}},
+  inputs:1, outputs:1, icon:'font-awesome/fa-globe',
+  label:function() { return this.name || 'IP2Proxy BIN'; },
+  paletteLabel:'IP2Proxy BIN'
+}); })();
+</script>
+<script type="text/html" data-template-name="ip2proxy-offline">
+  <div class="form-row"><label for="node-input-name"><i class="fa fa-tag"></i> Name</label><input id="node-input-name" type="text"></div>
+  <div class="form-row"><label for="node-input-binPath"><i class="fa fa-file"></i> BIN file</label><input id="node-input-binPath" type="text" placeholder="Absolute BIN file path"></div>
+</script>
+<script type="text/html" data-help-name="ip2proxy-offline">
+  <p>Offline proxy/VPN classification from a local IP2Proxy BIN file.</p>
+  <h3>Input</h3><p>String value in <code>msg.ip or msg.payload</code>. Explicit message property takes priority over payload.</p>
+  <h3>Output</h3><p>Result object in <code>msg.payload</code>. Other message properties remain unchanged.</p>
+  <h3>Errors</h3><p>Use a Node-RED <b>Catch</b> node to handle validation, API and BIN errors.</p>
+  
+</script>
