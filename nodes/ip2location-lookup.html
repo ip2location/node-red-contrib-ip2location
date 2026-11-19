@@ -1,0 +1,19 @@
+<script type="text/javascript">
+(function() { RED.nodes.registerType('ip2location-lookup', {
+  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},connection:{value:'',type:'ip2location-config'},lang:{value:''}},
+  inputs:1, outputs:1, icon:'font-awesome/fa-globe',
+  label:function() { return this.name || 'IP2Location lookup'; },
+  paletteLabel:'IP2Location lookup'
+}); })();
+</script>
+<script type="text/html" data-template-name="ip2location-lookup">
+  <div class="form-row"><label for="node-input-name"><i class="fa fa-tag"></i> Name</label><input id="node-input-name" type="text"></div>
+  <div class="form-row"><label for="node-input-connection"><i class="fa fa-key"></i> Credentials</label><input id="node-input-connection"></div><div class="form-row"><label for="node-input-lang">Language</label><input id="node-input-lang" type="text" placeholder="Optional; requires eligible plan"></div>
+</script>
+<script type="text/html" data-help-name="ip2location-lookup">
+  <p>Online IPv4/IPv6 geolocation, ASN and plan-dependent proxy fields.</p>
+  <h3>Input</h3><p>String value in <code>msg.ip or msg.payload</code>. Explicit message property takes priority over payload.</p>
+  <h3>Output</h3><p>Result object in <code>msg.payload</code>. Other message properties remain unchanged.</p>
+  <h3>Errors</h3><p>Use a Node-RED <b>Catch</b> node to handle validation, API and BIN errors.</p>
+  <p>Override configured language using <code>msg.lang</code>. Translation may require a Plus/Security plan.</p>
+</script>
