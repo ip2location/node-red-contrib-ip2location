@@ -1,19 +1,18 @@
 <script type="text/javascript">
 (function() { RED.nodes.registerType('ip2location-whois', {
-  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},connection:{value:'',type:'ip2location-config',required:true}},
+  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},connection:{value:'',type:'ip2location-config',required:true},timeoutMs:{value:10000,validate:RED.validators.number()}},
   inputs:1, outputs:1, icon:'font-awesome/fa-globe',
-  label:function() { return this.name || 'WHOIS'; },
-  paletteLabel:'WHOIS'
+  label:function() { return this.name || 'WHOIS lookup'; }, paletteLabel:'WHOIS lookup'
 }); })();
 </script>
 <script type="text/html" data-template-name="ip2location-whois">
-  <div class="form-row"><label for="node-input-name"><i class="fa fa-tag"></i> Name</label><input id="node-input-name" type="text"></div>
-  <div class="form-row"><label for="node-input-connection"><i class="fa fa-key"></i> Credentials</label><input id="node-input-connection"></div>
+  <div class="form-row"><label for="node-input-name">Name</label><input id="node-input-name" type="text"></div>
+  <div class="form-row"><label for="node-input-connection">Credentials</label><input id="node-input-connection"></div>
+  <div class="form-row"><label for="node-input-timeoutMs">Timeout (ms)</label><input id="node-input-timeoutMs" type="number" min="1" max="300000" step="1"></div>
 </script>
 <script type="text/html" data-help-name="ip2location-whois">
-  <p>WHOIS details for a domain name.</p>
-  <h3>Input</h3><p>String value in <code>msg.domain or msg.payload</code>. Explicit message property takes priority over payload.</p>
-  <h3>Output</h3><p>Result object in <code>msg.payload</code>. Other message properties remain unchanged.</p>
-  <h3>Errors</h3><p>Use a Node-RED <b>Catch</b> node to handle validation, API and BIN errors.</p>
-  
+  <p>WHOIS lookup for a domain name.</p>
+  <h3>Input</h3><p>Provide <code>msg.domain</code> or a domain string in <code>msg.payload</code>. Internationalized domains are converted to ASCII and a final dot is accepted.</p>
+  <h3>Output</h3><p>WHOIS JSON response in <code>msg.payload</code>, including registrar, registration dates, nameservers, and available contact data.</p>
+  <h3>Errors</h3><p>Use a Catch node for timeouts, invalid domains, authentication errors and insufficient credits (10004).</p>
 </script>

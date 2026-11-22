@@ -1,59 +1,71 @@
 [
   {
-    "id": "tab1",
+    "id": "e542d60c7fa4a147",
     "type": "tab",
-    "label": "ip2location-lookup example",
+    "label": "Authenticated IP lookup",
     "disabled": false,
-    "info": "Configure credentials or BIN file before deploying."
+    "info": "Authenticated IP geolocation example. Double-click the included IP2Location.io credentials configuration and enter your API key before deploying. Click Inject; view msg.payload in Debug."
   },
   {
-    "id": "inject1",
+    "id": "69910f9fb5ac15ca",
     "type": "inject",
-    "z": "tab1",
-    "name": "Sample input",
+    "z": "e542d60c7fa4a147",
+    "name": "Send 8.8.8.8",
     "props": [
       {
         "p": "payload"
       }
     ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
     "payload": "8.8.8.8",
     "payloadType": "str",
-    "repeat": "",
-    "once": false,
-    "x": 130,
+    "x": 150,
     "y": 120,
     "wires": [
       [
-        "work1"
+        "e18f2e510b29c549"
       ]
     ]
   },
   {
-    "id": "work1",
+    "id": "d02dc8a92bce5330",
+    "type": "ip2location-config",
+    "name": "IP2Location.io API key (enter key)"
+  },
+  {
+    "id": "e18f2e510b29c549",
     "type": "ip2location-lookup",
-    "z": "tab1",
-    "name": "",
-    "connection": "",
+    "z": "e542d60c7fa4a147",
+    "name": "Authenticated lookup",
+    "connection": "d02dc8a92bce5330",
+    "timeoutMs": 10000,
     "lang": "",
-    "binPath": "",
-    "x": 345,
+    "x": 355,
     "y": 120,
     "wires": [
       [
-        "debug1"
+        "672dfe5921918ce7"
       ]
     ]
   },
   {
-    "id": "debug1",
+    "id": "672dfe5921918ce7",
     "type": "debug",
-    "z": "tab1",
+    "z": "e542d60c7fa4a147",
     "name": "Lookup result",
     "active": true,
     "tosidebar": true,
+    "console": false,
+    "tostatus": false,
     "complete": "payload",
     "targetType": "msg",
-    "x": 550,
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
     "y": 120,
     "wires": []
   }

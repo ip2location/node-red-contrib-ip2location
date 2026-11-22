@@ -1,59 +1,71 @@
 [
   {
-    "id": "tab1",
+    "id": "7e9ab4b591842ee5",
     "type": "tab",
-    "label": "ip2location-hosted-domains example",
+    "label": "Hosted Domains lookup",
     "disabled": false,
-    "info": "Configure credentials or BIN file before deploying."
+    "info": "Hosted Domains example (one page per lookup). Edit the included IP2Location.io credentials configuration and enter a valid API key. Page defaults to 1; msg.page overrides it. Deploy and click Inject."
   },
   {
-    "id": "inject1",
+    "id": "f94b8631f70638b0",
     "type": "inject",
-    "z": "tab1",
-    "name": "Sample input",
+    "z": "7e9ab4b591842ee5",
+    "name": "Send 8.8.8.8",
     "props": [
       {
         "p": "payload"
       }
     ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
     "payload": "8.8.8.8",
     "payloadType": "str",
-    "repeat": "",
-    "once": false,
-    "x": 130,
+    "x": 150,
     "y": 120,
     "wires": [
       [
-        "work1"
+        "57964b21cfaa87ef"
       ]
     ]
   },
   {
-    "id": "work1",
+    "id": "4e5a3f70695bdd7a",
+    "type": "ip2location-config",
+    "name": "IP2Location.io API key (enter key)"
+  },
+  {
+    "id": "57964b21cfaa87ef",
     "type": "ip2location-hosted-domains",
-    "z": "tab1",
-    "name": "",
-    "connection": "",
-    "lang": "",
-    "binPath": "",
-    "x": 345,
+    "z": "7e9ab4b591842ee5",
+    "name": "Hosted domains",
+    "connection": "4e5a3f70695bdd7a",
+    "timeoutMs": 10000,
+    "page": 1,
+    "x": 355,
     "y": 120,
     "wires": [
       [
-        "debug1"
+        "79a50cd8cb3fd542"
       ]
     ]
   },
   {
-    "id": "debug1",
+    "id": "79a50cd8cb3fd542",
     "type": "debug",
-    "z": "tab1",
+    "z": "7e9ab4b591842ee5",
     "name": "Lookup result",
     "active": true,
     "tosidebar": true,
+    "console": false,
+    "tostatus": false,
     "complete": "payload",
     "targetType": "msg",
-    "x": 550,
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
     "y": 120,
     "wires": []
   }

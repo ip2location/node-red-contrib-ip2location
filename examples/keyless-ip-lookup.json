@@ -1,59 +1,71 @@
 [
   {
-    "id": "tab1",
+    "id": "82e371708b7b30e0",
     "type": "tab",
-    "label": "Keyless IP geolocation",
+    "label": "Keyless IP lookup",
     "disabled": false,
-    "info": "Configure credentials or BIN file before deploying."
+    "info": "Keyless IP geolocation example. Uses the included IP2Location.io credentials configuration with no API key. Deploy, click Inject, and inspect msg.payload in Debug. Keyless quota: 1,000 requests/day; attribution required."
   },
   {
-    "id": "inject1",
+    "id": "b3cdcd0a08ba5d40",
     "type": "inject",
-    "z": "tab1",
-    "name": "Sample input",
+    "z": "82e371708b7b30e0",
+    "name": "Send 8.8.8.8",
     "props": [
       {
         "p": "payload"
       }
     ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
     "payload": "8.8.8.8",
     "payloadType": "str",
-    "repeat": "",
-    "once": false,
-    "x": 130,
+    "x": 150,
     "y": 120,
     "wires": [
       [
-        "work1"
+        "f39b03a972cad96e"
       ]
     ]
   },
   {
-    "id": "work1",
+    "id": "c44b58caf0f6b5cc",
+    "type": "ip2location-config",
+    "name": "Keyless IP2Location.io"
+  },
+  {
+    "id": "f39b03a972cad96e",
     "type": "ip2location-lookup",
-    "z": "tab1",
+    "z": "82e371708b7b30e0",
     "name": "Keyless lookup",
-    "connection": "",
+    "connection": "c44b58caf0f6b5cc",
+    "timeoutMs": 10000,
     "lang": "",
-    "binPath": "",
-    "x": 345,
+    "x": 355,
     "y": 120,
     "wires": [
       [
-        "debug1"
+        "a8ce4dfe056c046a"
       ]
     ]
   },
   {
-    "id": "debug1",
+    "id": "a8ce4dfe056c046a",
     "type": "debug",
-    "z": "tab1",
+    "z": "82e371708b7b30e0",
     "name": "Lookup result",
     "active": true,
     "tosidebar": true,
+    "console": false,
+    "tostatus": false,
     "complete": "payload",
     "targetType": "msg",
-    "x": 550,
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
     "y": 120,
     "wires": []
   }

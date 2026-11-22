@@ -1,59 +1,64 @@
 [
   {
-    "id": "tab1",
+    "id": "25925dbb4986a065",
     "type": "tab",
-    "label": "ip2proxy-offline example",
+    "label": "Offline IP2Proxy BIN lookup",
     "disabled": false,
-    "info": "Configure credentials or BIN file before deploying."
+    "info": "Offline IP2Proxy lookup. BEFORE DEPLOYING, edit the IP2Proxy BIN node and replace the example BIN path with the absolute path to your own IP2Proxy LITE or commercial BIN file. No API key required."
   },
   {
-    "id": "inject1",
+    "id": "2e55c77f71b1fe98",
     "type": "inject",
-    "z": "tab1",
-    "name": "Sample input",
+    "z": "25925dbb4986a065",
+    "name": "Send 8.8.8.8",
     "props": [
       {
         "p": "payload"
       }
     ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
     "payload": "8.8.8.8",
     "payloadType": "str",
-    "repeat": "",
-    "once": false,
-    "x": 130,
+    "x": 150,
     "y": 120,
     "wires": [
       [
-        "work1"
+        "3634138c417f23e8"
       ]
     ]
   },
   {
-    "id": "work1",
+    "id": "3634138c417f23e8",
     "type": "ip2proxy-offline",
-    "z": "tab1",
-    "name": "",
-    "connection": "",
-    "lang": "",
-    "binPath": "",
-    "x": 345,
+    "z": "25925dbb4986a065",
+    "name": "IP2Proxy BIN",
+    "binPath": "/path/to/IP2PROXY-LITE.BIN",
+    "x": 355,
     "y": 120,
     "wires": [
       [
-        "debug1"
+        "e2e35e8201d0321c"
       ]
     ]
   },
   {
-    "id": "debug1",
+    "id": "e2e35e8201d0321c",
     "type": "debug",
-    "z": "tab1",
+    "z": "25925dbb4986a065",
     "name": "Lookup result",
     "active": true,
     "tosidebar": true,
+    "console": false,
+    "tostatus": false,
     "complete": "payload",
     "targetType": "msg",
-    "x": 550,
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
     "y": 120,
     "wires": []
   }

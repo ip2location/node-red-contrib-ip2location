@@ -1,20 +1,28 @@
 'use strict';
 const {readIP,run} = require('../lib/utils');
-const {openBin} = require('../lib/offline-client');
+const {openBin,validateBinResult} = require('../lib/offline-client');
 module.exports = function (RED) {
   function Offline(config) {
     RED.nodes.createNode(this,config);
-    let db;
-    let openError;
-    try { db = openBin('proxy', config.binPath); } catch (e) { openError = e; this.status({fill:'red',shape:'ring',text:'BIN unavailable'}); }
-    run(this, async msg => {
+    let db, openError;
+    const initialize = () => {
+      const next = openBin('proxy',config.binPath);
+      const previous = db;
+      db = next;
+      openError = undefined;
+      if (previous) previous.close();
+      this.status({fill:'green',shape:'dot',text:'ready'});
+    };
+    try { initialize(); } catch (e) { openError=e; this.status({fill:'red',shape:'ring',text:'BIN unavailable'}); }
+    run(this, msg => {
       const ip = readIP(msg);
+      if (msg.reload === true) {
+        try { initialize(); } catch (err) { openError = err; throw err; }
+      }
       if (openError) throw openError;
-      return db.getAll(ip);
-    });
-    this.on('close', function(done) {
-      try { if (db && typeof db.close === 'function') db.close(); done(); } catch(err) { done(err); }
-    });
+      return validateBinResult('proxy',db.getAll(ip));
+    }, {offline:true});
+    this.on('close', done => { try { if (db) db.close(); done(); } catch (err) { done(err); } });
   }
-  RED.nodes.registerType('ip2proxy-offline', Offline);
+  RED.nodes.registerType('ip2proxy-offline',Offline);
 };

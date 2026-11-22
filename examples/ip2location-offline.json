@@ -1,59 +1,64 @@
 [
   {
-    "id": "tab1",
+    "id": "33930c47f0278b60",
     "type": "tab",
-    "label": "ip2location-offline example",
+    "label": "Offline IP2Location BIN lookup",
     "disabled": false,
-    "info": "Configure credentials or BIN file before deploying."
+    "info": "Offline IP2Location lookup. BEFORE DEPLOYING, edit the IP2Location BIN node and replace the example BIN path with the absolute path to your own IP2Location LITE or commercial BIN file. No API key required."
   },
   {
-    "id": "inject1",
+    "id": "28737a5c57bc4e7a",
     "type": "inject",
-    "z": "tab1",
-    "name": "Sample input",
+    "z": "33930c47f0278b60",
+    "name": "Send 8.8.8.8",
     "props": [
       {
         "p": "payload"
       }
     ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
     "payload": "8.8.8.8",
     "payloadType": "str",
-    "repeat": "",
-    "once": false,
-    "x": 130,
+    "x": 150,
     "y": 120,
     "wires": [
       [
-        "work1"
+        "c40f8e25ad764773"
       ]
     ]
   },
   {
-    "id": "work1",
+    "id": "c40f8e25ad764773",
     "type": "ip2location-offline",
-    "z": "tab1",
-    "name": "",
-    "connection": "",
-    "lang": "",
-    "binPath": "",
-    "x": 345,
+    "z": "33930c47f0278b60",
+    "name": "IP2Location BIN",
+    "binPath": "/path/to/IP2LOCATION-LITE.BIN",
+    "x": 355,
     "y": 120,
     "wires": [
       [
-        "debug1"
+        "c5a8ab0958d22f1a"
       ]
     ]
   },
   {
-    "id": "debug1",
+    "id": "c5a8ab0958d22f1a",
     "type": "debug",
-    "z": "tab1",
+    "z": "33930c47f0278b60",
     "name": "Lookup result",
     "active": true,
     "tosidebar": true,
+    "console": false,
+    "tostatus": false,
     "complete": "payload",
     "targetType": "msg",
-    "x": 550,
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
     "y": 120,
     "wires": []
   }

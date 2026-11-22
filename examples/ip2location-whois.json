@@ -1,59 +1,70 @@
 [
   {
-    "id": "tab1",
+    "id": "7c7626992b70146f",
     "type": "tab",
-    "label": "ip2location-whois example",
+    "label": "WHOIS domain lookup",
     "disabled": false,
-    "info": "Configure credentials or BIN file before deploying."
+    "info": "WHOIS lookup example. Edit the included IP2Location.io credentials configuration, enter a valid API key, then deploy and click Inject. WHOIS requires credentials and available credits."
   },
   {
-    "id": "inject1",
+    "id": "79d2dccb5237516c",
     "type": "inject",
-    "z": "tab1",
-    "name": "Sample input",
+    "z": "7c7626992b70146f",
+    "name": "Send example.com",
     "props": [
       {
         "p": "payload"
       }
     ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
     "payload": "example.com",
     "payloadType": "str",
-    "repeat": "",
-    "once": false,
-    "x": 130,
+    "x": 150,
     "y": 120,
     "wires": [
       [
-        "work1"
+        "c2f03179ecfb2980"
       ]
     ]
   },
   {
-    "id": "work1",
+    "id": "fabd1b4b46bc0e6e",
+    "type": "ip2location-config",
+    "name": "IP2Location.io API key (enter key)"
+  },
+  {
+    "id": "c2f03179ecfb2980",
     "type": "ip2location-whois",
-    "z": "tab1",
-    "name": "",
-    "connection": "",
-    "lang": "",
-    "binPath": "",
-    "x": 345,
+    "z": "7c7626992b70146f",
+    "name": "WHOIS lookup",
+    "connection": "fabd1b4b46bc0e6e",
+    "timeoutMs": 10000,
+    "x": 355,
     "y": 120,
     "wires": [
       [
-        "debug1"
+        "33d04a96ab431c5c"
       ]
     ]
   },
   {
-    "id": "debug1",
+    "id": "33d04a96ab431c5c",
     "type": "debug",
-    "z": "tab1",
+    "z": "7c7626992b70146f",
     "name": "Lookup result",
     "active": true,
     "tosidebar": true,
+    "console": false,
+    "tostatus": false,
     "complete": "payload",
     "targetType": "msg",
-    "x": 550,
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
     "y": 120,
     "wires": []
   }

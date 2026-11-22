@@ -1,6 +1,6 @@
 <script type="text/javascript">
 (function() { RED.nodes.registerType('ip2location-hosted-domains', {
-  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},connection:{value:'',type:'ip2location-config',required:true}},
+  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},connection:{value:'',type:'ip2location-config',required:true},page:{value:1,validate:RED.validators.number()},timeoutMs:{value:10000,validate:RED.validators.number()}},
   inputs:1, outputs:1, icon:'font-awesome/fa-globe',
   label:function() { return this.name || 'Hosted domains'; },
   paletteLabel:'Hosted domains'
@@ -9,11 +9,12 @@
 <script type="text/html" data-template-name="ip2location-hosted-domains">
   <div class="form-row"><label for="node-input-name"><i class="fa fa-tag"></i> Name</label><input id="node-input-name" type="text"></div>
   <div class="form-row"><label for="node-input-connection"><i class="fa fa-key"></i> Credentials</label><input id="node-input-connection"></div>
+  <div class="form-row"><label for="node-input-page">Page</label><input id="node-input-page" type="number" min="1" step="1"></div>
+  <div class="form-row"><label for="node-input-timeoutMs">Timeout (ms)</label><input id="node-input-timeoutMs" type="number" min="1" max="300000" step="1"></div>
 </script>
 <script type="text/html" data-help-name="ip2location-hosted-domains">
-  <p>List of domains hosted on an IPv4/IPv6 address.</p>
-  <h3>Input</h3><p>String value in <code>msg.ip or msg.payload</code>. Explicit message property takes priority over payload.</p>
-  <h3>Output</h3><p>Result object in <code>msg.payload</code>. Other message properties remain unchanged.</p>
-  <h3>Errors</h3><p>Use a Node-RED <b>Catch</b> node to handle validation, API and BIN errors.</p>
-  
+  <p>List domains hosted on an IP address. Fetches a single page per message.</p>
+  <h3>Input</h3><p>Supply <code>msg.ip</code> or <code>msg.payload</code>. <code>msg.page</code> overrides the configured page and must be a positive integer.</p>
+  <h3>Output</h3><p>The Hosted Domains API response is returned unchanged in <code>msg.payload</code>; other message properties are preserved.</p>
+  <h3>Errors</h3><p>Use a Catch node for input errors, timeouts, API failures, or insufficient credits (10004).</p>
 </script>

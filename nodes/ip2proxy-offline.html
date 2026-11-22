@@ -7,13 +7,12 @@
 }); })();
 </script>
 <script type="text/html" data-template-name="ip2proxy-offline">
-  <div class="form-row"><label for="node-input-name"><i class="fa fa-tag"></i> Name</label><input id="node-input-name" type="text"></div>
-  <div class="form-row"><label for="node-input-binPath"><i class="fa fa-file"></i> BIN file</label><input id="node-input-binPath" type="text" placeholder="Absolute BIN file path"></div>
+  <div class="form-row"><label for="node-input-name">Name</label><input id="node-input-name" type="text"></div>
+  <div class="form-row"><label for="node-input-binPath">BIN file</label><input id="node-input-binPath" type="text" placeholder="Absolute BIN file path"></div>
 </script>
 <script type="text/html" data-help-name="ip2proxy-offline">
-  <p>Offline proxy/VPN classification from a local IP2Proxy BIN file.</p>
-  <h3>Input</h3><p>String value in <code>msg.ip or msg.payload</code>. Explicit message property takes priority over payload.</p>
-  <h3>Output</h3><p>Result object in <code>msg.payload</code>. Other message properties remain unchanged.</p>
-  <h3>Errors</h3><p>Use a Node-RED <b>Catch</b> node to handle validation, API and BIN errors.</p>
-  
+  <p>Offline lookups using a local IP2Proxy BIN database. No API key or internet connection required.</p>
+  <h3>Input</h3><p>Provide <code>msg.ip</code> (preferred) or an IP string in <code>msg.payload</code>. Set <code>msg.reload = true</code> to reopen the configured BIN after a database update. Otherwise, redeploy to reload it.</p>
+  <h3>Output</h3><p>SDK object in <code>msg.payload</code>. Available fields depend on BIN package (for example proxy type, ISP, usage type, isProxy). Offline SDK field names differ from IP2Location.io responses and typically use camelCase such as <code>countryShort</code>, rather than API <code>country_code</code>.</p>
+  <h3>Errors</h3><p>Use a Catch node for invalid/missing BINs and unsupported IP types. IPv6 against an IPv4-only BIN returns <code>IPV6 ADDRESS MISSING IN IPV4 BIN</code>, which is reported as an error instead of a successful lookup.</p>
 </script>
