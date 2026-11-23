@@ -13,8 +13,8 @@ function fakeSdk(calls, response = {}) {
 }
 test('empty language omitted, trim non-empty language', async()=>{
   const calls=[]; const load=fakeSdk(calls);
-  await ipLookup('', '8.8.8.8', '   ',load);
-  await ipLookup('x','8.8.8.8',' es ',load);
+  await ipLookup('', '8.8.8.8', '   ',10000,load);
+  await ipLookup('x','8.8.8.8',' es ',10000,load);
   assert.equal(calls[0].lang,undefined);
   assert.equal(calls[1].lang,'es');
 });
@@ -27,13 +27,13 @@ test('hosted page defaults to one and forwards chosen page', async()=>{
 });
 test('request times out when SDK never resolves',async()=>{
   const never=async()=>({Configuration:class {}, IPGeolocation:class {lookup(){return new Promise(()=>{});}}});
-  await assert.rejects(ipLookup('','8.8.8.8','',never,20),/timed out/);
+  await assert.rejects(ipLookup('','8.8.8.8','',20,never),/timed out/);
 });
 test('quota and credit failures get useful messages', async()=>{
   class Configuration{};
   const keyless=async()=>({Configuration,IPGeolocation:class {lookup(){return Promise.reject(new Error(JSON.stringify({error:{error_code:10000,error_message:'Daily quota exceeded. Please register at https://www.ip2location.io to get 50,000 free queries monthly.'}})));}}});
   const credits=async()=>({Configuration,HostedDomain:class {lookup(){return Promise.reject(new Error(JSON.stringify({error:{error_code:10004,error_message:'Insufficient credits'}})));}},DomainWhois:class {lookup(){return Promise.reject(new Error(JSON.stringify({error:{error_code:10004,error_message:'Insufficient credits'}})));}}});
-  await assert.rejects(ipLookup('','8.8.8.8','',keyless),/Keyless daily quota exceeded/);
+  await assert.rejects(ipLookup('','8.8.8.8','',10000,keyless),/Keyless daily quota exceeded/);
   await assert.rejects(hostedLookup('x','8.8.8.8',1,1000,credits),/Insufficient API credits/i);
   await assert.rejects(whoisLookup('x','example.com',1000,credits),/Insufficient API credits/i);
 });
