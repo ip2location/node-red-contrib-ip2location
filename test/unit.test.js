@@ -29,18 +29,18 @@ test('WHOIS domain input validates and prioritizes msg.domain', () => {
 });
 test('keyless IP lookup passes an empty API key through the SDK', async () => {
   const calls=[];
-  const result = await ipLookup('', '8.8.8.8', '', fakeSDK(calls));
+  const result = await ipLookup('', '8.8.8.8', '', '', fakeSDK(calls));
   assert.deepEqual(result, {ip:'8.8.8.8', country_code:'US'});
   assert.deepEqual(calls, [{key:'', ip:'8.8.8.8', lang:undefined}]);
 });
 test('authenticated IP lookup uses the same SDK and forwards language', async () => {
   const calls=[];
-  await ipLookup('test-key', '2001:4860:4860::8888', 'es', fakeSDK(calls));
+  await ipLookup('test-key', '2001:4860:4860::8888', 'es', '', fakeSDK(calls));
   assert.deepEqual(calls, [{key:'test-key', ip:'2001:4860:4860::8888', lang:'es'}]);
 });
 test('SDK lookup errors propagate to Node-RED error handling', async () => {
   const calls=[];
-  await assert.rejects(ipLookup('', '8.8.8.8', '', fakeSDK(calls, new Error('quota reached'))), /quota reached/);
+  await assert.rejects(ipLookup('', '8.8.8.8', '', '', fakeSDK(calls, new Error('quota reached'))), /quota reached/);
   assert.equal(calls.length, 1);
 });
 test('WHOIS and hosted domains require keys', async () => {
