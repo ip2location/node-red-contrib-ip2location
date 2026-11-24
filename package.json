@@ -1,0 +1,60 @@
+{
+  "name": "node-red-contrib-ip2location",
+  "version": "0.1.0",
+  "description": "IP2Location.io, IP2WHOIS and offline IP2Location/IP2Proxy BIN lookup nodes for Node-RED",
+  "license": "MIT",
+  "author": "IP2Location",
+  "homepage": "https://github.com/ip2location/node-red-contrib-ip2location#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ip2location/node-red-contrib-ip2location.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ip2location/node-red-contrib-ip2location/issues"
+  },
+  "keywords": [
+    "node-red",
+    "node-red-contrib",
+    "ip2location",
+    "ip2proxy",
+    "ip2whois",
+    "geolocation",
+    "vpn",
+    "whois"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "node-red": {
+    "version": ">=3.0.0",
+    "nodes": {
+      "ip2location-config": "nodes/ip2location-config.js",
+      "ip2location-lookup": "nodes/ip2location-lookup.js",
+      "ip2location-whois": "nodes/ip2location-whois.js",
+      "ip2location-hosted-domains": "nodes/ip2location-hosted-domains.js",
+      "ip2location-offline": "nodes/ip2location-offline.js",
+      "ip2proxy-offline": "nodes/ip2proxy-offline.js"
+    }
+  },
+  "dependencies": {
+    "ip2location-io-nodejs": "^1.1.3",
+    "ip2location-nodejs": "^9.8.0",
+    "ip2proxy-nodejs": "^4.5.0"
+  },
+  "devDependencies": {
+    "node-red": "^3.1.0",
+    "node-red-node-test-helper": "^0.3.0"
+  },
+  "scripts": {
+    "test": "node --test test/unit.test.js test/runtime.test.js test/regression.test.js",
+    "test:integration": "node --test test/helper.integration.test.js",
+    "check": "npm test"
+  },
+  "files": [
+    "nodes/",
+    "lib/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ]
+}

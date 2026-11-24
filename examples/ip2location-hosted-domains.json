@@ -1,0 +1,72 @@
+[
+  {
+    "id": "7e9ab4b591842ee5",
+    "type": "tab",
+    "label": "Hosted Domains lookup",
+    "disabled": false,
+    "info": "Hosted Domains example (one page per lookup). Edit the included IP2Location.io credentials configuration and enter a valid API key. Page defaults to 1; msg.page overrides it. Deploy and click Inject."
+  },
+  {
+    "id": "f94b8631f70638b0",
+    "type": "inject",
+    "z": "7e9ab4b591842ee5",
+    "name": "Send 8.8.8.8",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "8.8.8.8",
+    "payloadType": "str",
+    "x": 150,
+    "y": 120,
+    "wires": [
+      [
+        "57964b21cfaa87ef"
+      ]
+    ]
+  },
+  {
+    "id": "4e5a3f70695bdd7a",
+    "type": "ip2location-config",
+    "name": "IP2Location.io API key (enter key)"
+  },
+  {
+    "id": "57964b21cfaa87ef",
+    "type": "ip2location-hosted-domains",
+    "z": "7e9ab4b591842ee5",
+    "name": "Hosted domains",
+    "connection": "4e5a3f70695bdd7a",
+    "timeoutMs": 10000,
+    "page": 1,
+    "x": 355,
+    "y": 120,
+    "wires": [
+      [
+        "79a50cd8cb3fd542"
+      ]
+    ]
+  },
+  {
+    "id": "79a50cd8cb3fd542",
+    "type": "debug",
+    "z": "7e9ab4b591842ee5",
+    "name": "Lookup result",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
+    "y": 120,
+    "wires": []
+  }
+]

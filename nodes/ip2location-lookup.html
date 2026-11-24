@@ -1,0 +1,19 @@
+<script type="text/javascript">
+(function() { RED.nodes.registerType('ip2location-lookup', {
+  category:'IP2Location', color:'#89C4DA', defaults:{name:{value:''},connection:{value:'',type:'ip2location-config'},lang:{value:''},timeoutMs:{value:10000,validate:RED.validators.number()}},
+  inputs:1, outputs:1, icon:'font-awesome/fa-globe',
+  label:function() { return this.name || 'IP2Location lookup'; }, paletteLabel:'IP2Location lookup'
+}); })();
+</script>
+<script type="text/html" data-template-name="ip2location-lookup">
+  <div class="form-row"><label for="node-input-name">Name</label><input id="node-input-name" type="text"></div>
+  <div class="form-row"><label for="node-input-connection">Credentials</label><input id="node-input-connection"></div>
+  <div class="form-row"><label for="node-input-lang">Language</label><input id="node-input-lang" type="text" placeholder="Optional; eligible plan"></div>
+  <div class="form-row"><label for="node-input-timeoutMs">Timeout (ms)</label><input id="node-input-timeoutMs" type="number" min="1" max="300000" step="1"></div>
+</script>
+<script type="text/html" data-help-name="ip2location-lookup">
+  <p>Online IPv4/IPv6 geolocation, ASN, ISP and plan-dependent proxy fields.</p>
+  <h3>Input</h3><p><code>msg.ip</code> (preferred) or <code>msg.payload</code> (IP string). <code>msg.lang</code> overrides Language; empty language is omitted.</p>
+  <h3>Output</h3><p>API JSON result in <code>msg.payload</code>. Common fields: <code>country_code</code>, <code>country_name</code>, <code>region_name</code>, <code>city_name</code>, <code>latitude</code>, <code>longitude</code>, <code>asn</code>, <code>is_proxy</code>; availability varies by plan.</p>
+  <h3>Limits and errors</h3><p>Keyless lookup permits up to 1,000/day and requires attribution. Error 10000 without a key indicates the daily limit has been reached. Use Catch for timeouts and errors.</p>
+</script>

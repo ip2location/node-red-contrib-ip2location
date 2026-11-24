@@ -1,0 +1,72 @@
+[
+  {
+    "id": "82e371708b7b30e0",
+    "type": "tab",
+    "label": "Keyless IP lookup",
+    "disabled": false,
+    "info": "Keyless IP geolocation example. Uses the included IP2Location.io credentials configuration with no API key. Deploy, click Inject, and inspect msg.payload in Debug. Keyless quota: 1,000 requests/day; attribution required."
+  },
+  {
+    "id": "b3cdcd0a08ba5d40",
+    "type": "inject",
+    "z": "82e371708b7b30e0",
+    "name": "Send 8.8.8.8",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "8.8.8.8",
+    "payloadType": "str",
+    "x": 150,
+    "y": 120,
+    "wires": [
+      [
+        "f39b03a972cad96e"
+      ]
+    ]
+  },
+  {
+    "id": "c44b58caf0f6b5cc",
+    "type": "ip2location-config",
+    "name": "Keyless IP2Location.io"
+  },
+  {
+    "id": "f39b03a972cad96e",
+    "type": "ip2location-lookup",
+    "z": "82e371708b7b30e0",
+    "name": "Keyless lookup",
+    "connection": "c44b58caf0f6b5cc",
+    "timeoutMs": 10000,
+    "lang": "",
+    "x": 355,
+    "y": 120,
+    "wires": [
+      [
+        "a8ce4dfe056c046a"
+      ]
+    ]
+  },
+  {
+    "id": "a8ce4dfe056c046a",
+    "type": "debug",
+    "z": "82e371708b7b30e0",
+    "name": "Lookup result",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
+    "y": 120,
+    "wires": []
+  }
+]

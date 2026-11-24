@@ -1,0 +1,65 @@
+[
+  {
+    "id": "33930c47f0278b60",
+    "type": "tab",
+    "label": "Offline IP2Location BIN lookup",
+    "disabled": false,
+    "info": "Offline IP2Location lookup. BEFORE DEPLOYING, edit the IP2Location BIN node and replace the example BIN path with the absolute path to your own IP2Location LITE or commercial BIN file. No API key required."
+  },
+  {
+    "id": "28737a5c57bc4e7a",
+    "type": "inject",
+    "z": "33930c47f0278b60",
+    "name": "Send 8.8.8.8",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "8.8.8.8",
+    "payloadType": "str",
+    "x": 150,
+    "y": 120,
+    "wires": [
+      [
+        "c40f8e25ad764773"
+      ]
+    ]
+  },
+  {
+    "id": "c40f8e25ad764773",
+    "type": "ip2location-offline",
+    "z": "33930c47f0278b60",
+    "name": "IP2Location BIN",
+    "binPath": "/path/to/IP2LOCATION-LITE.BIN",
+    "x": 355,
+    "y": 120,
+    "wires": [
+      [
+        "c5a8ab0958d22f1a"
+      ]
+    ]
+  },
+  {
+    "id": "c5a8ab0958d22f1a",
+    "type": "debug",
+    "z": "33930c47f0278b60",
+    "name": "Lookup result",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
+    "y": 120,
+    "wires": []
+  }
+]

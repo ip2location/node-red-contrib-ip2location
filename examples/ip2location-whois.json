@@ -1,0 +1,71 @@
+[
+  {
+    "id": "7c7626992b70146f",
+    "type": "tab",
+    "label": "WHOIS domain lookup",
+    "disabled": false,
+    "info": "WHOIS lookup example. Edit the included IP2Location.io credentials configuration, enter a valid API key, then deploy and click Inject. WHOIS requires credentials and available credits."
+  },
+  {
+    "id": "79d2dccb5237516c",
+    "type": "inject",
+    "z": "7c7626992b70146f",
+    "name": "Send example.com",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "example.com",
+    "payloadType": "str",
+    "x": 150,
+    "y": 120,
+    "wires": [
+      [
+        "c2f03179ecfb2980"
+      ]
+    ]
+  },
+  {
+    "id": "fabd1b4b46bc0e6e",
+    "type": "ip2location-config",
+    "name": "IP2Location.io API key (enter key)"
+  },
+  {
+    "id": "c2f03179ecfb2980",
+    "type": "ip2location-whois",
+    "z": "7c7626992b70146f",
+    "name": "WHOIS lookup",
+    "connection": "fabd1b4b46bc0e6e",
+    "timeoutMs": 10000,
+    "x": 355,
+    "y": 120,
+    "wires": [
+      [
+        "33d04a96ab431c5c"
+      ]
+    ]
+  },
+  {
+    "id": "33d04a96ab431c5c",
+    "type": "debug",
+    "z": "7c7626992b70146f",
+    "name": "Lookup result",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 580,
+    "y": 120,
+    "wires": []
+  }
+]
