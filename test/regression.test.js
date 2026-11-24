@@ -33,9 +33,12 @@ test('quota and credit failures get useful messages', async()=>{
   class Configuration{};
   const keyless=async()=>({Configuration,IPGeolocation:class {lookup(){return Promise.reject(new Error(JSON.stringify({error:{error_code:10000,error_message:'Daily quota exceeded. Please register at https://www.ip2location.io to get 50,000 free queries monthly.'}})));}}});
   const credits=async()=>({Configuration,HostedDomain:class {lookup(){return Promise.reject(new Error(JSON.stringify({error:{error_code:10004,error_message:'Insufficient credits'}})));}},DomainWhois:class {lookup(){return Promise.reject(new Error(JSON.stringify({error:{error_code:10004,error_message:'Insufficient credits'}})));}}});
+  const stripped=async()=>({Configuration,HostedDomain:class {lookup(){return Promise.reject(new Error('Insufficient credits'));}},DomainWhois:class {lookup(){return Promise.reject(new Error('Insufficient credits'));}}});
   await assert.rejects(ipLookup('','8.8.8.8','',10000,keyless),/Keyless daily quota exceeded/);
   await assert.rejects(hostedLookup('x','8.8.8.8',1,1000,credits),/Insufficient API credits/i);
   await assert.rejects(whoisLookup('x','example.com',1000,credits),/Insufficient API credits/i);
+  await assert.rejects(hostedLookup('x','8.8.8.8',1,1000,stripped),/Insufficient API credits/i);
+  await assert.rejects(whoisLookup('x','example.com',1000,stripped),/Insufficient API credits/i);
 });
 test('IP property present but invalid does not fallback',()=>{
   assert.throws(()=>readIP({ip:'',payload:'8.8.8.8'}),/non-empty string/);
