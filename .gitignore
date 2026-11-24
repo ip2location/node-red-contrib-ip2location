@@ -6,3 +6,5 @@ coverage/
 *.BIN
 *.bin
 .DS_Store
+*.zip
+*.ZIP
