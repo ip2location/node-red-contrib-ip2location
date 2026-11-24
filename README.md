@@ -132,19 +132,19 @@ Node errors can be handled using a Node-RED **Catch** node. Errors do not produc
 
 ### Online API nodes
 
-![Online IP2Location.io flow - keyless](https://raw.githubusercontent.com/ip2location/node-red-contrib-ip2location/main/docs/screenshots/keyless-ip-lookup.png)
+![Online IP2Location.io flow - keyless](docs/screenshots/keyless-ip-lookup.png)
 
-![Online IP2Location.io flow - authenticated](https://raw.githubusercontent.com/ip2location/node-red-contrib-ip2location/main/docs/screenshots/authenticated-ip-lookup.png)
+![Online IP2Location.io flow - authenticated](docs/screenshots/authenticated-ip-lookup.png)
 
-![Online WHOIS flow](https://raw.githubusercontent.com/ip2location/node-red-contrib-ip2location/main/docs/screenshots/whois-lookup.png)
+![Online WHOIS flow](docs/screenshots/whois-lookup.png)
 
-![Online Hosted Domains flow](https://raw.githubusercontent.com/ip2location/node-red-contrib-ip2location/main/docs/screenshots/hosted-domains-lookup.png)
+![Online Hosted Domains flow](docs/screenshots/hosted-domains-lookup.png)
 
 ### Offline BIN nodes
 
-![Offline IP2Location flow](https://raw.githubusercontent.com/ip2location/node-red-contrib-ip2location/main/docs/screenshots/ip2location-bin-lookup.png)
+![Offline IP2Location flow](docs/screenshots/ip2location-bin-lookup.png)
 
-![Offline IP2Proxy flow](https://raw.githubusercontent.com/ip2location/node-red-contrib-ip2location/main/docs/screenshots/ip2proxy-bin-lookup.png)
+![Offline IP2Proxy flow](docs/screenshots/ip2proxy-bin-lookup.png)
 
 ## Related SDKs
 
