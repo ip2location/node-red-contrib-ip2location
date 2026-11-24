@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-ip2location",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "IP2Location.io, IP2WHOIS and offline IP2Location/IP2Proxy BIN lookup nodes for Node-RED",
   "license": "MIT",
   "author": "IP2Location",
